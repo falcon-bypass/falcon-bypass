@@ -1,34 +1,41 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Falcon Bypass | Premium PUBG Mobile Tools</title>
+    <title>FALCON BYPASS | Premium PUBG/BGMI Tool</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Sofia Sans', sans-serif;
+            cursor: none;
         }
         
         :root {
-            --primary: #0f172a;
-            --secondary: #1e293b;
-            --accent: #3b82f6;
-            --accent-glow: rgba(59, 130, 246, 0.4);
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --text: #f8fafc;
-            --text-muted: #94a3b8;
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --border: rgba(255, 255, 255, 0.1);
+            --primary: #0a0e17;
+            --secondary: #0f172a;
+            --accent: #00a8ff;
+            --accent-glow: rgba(0, 168, 255, 0.4);
+            --accent-light: rgba(0, 168, 255, 0.1);
+            --success: #00d8a7;
+            --warning: #ffce54;
+            --danger: #ff5e7d;
+            --text: #ffffff;
+            --text-muted: #a0aec0;
+            --card-bg: rgba(15, 23, 42, 0.7);
+            --card-glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(0, 168, 255, 0.2);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --neon-glow: 0 0 10px rgba(0, 168, 255, 0.7);
         }
         
         body {
-            background: url('https://i.ibb.co/WWNHZ93Z/BG-Image.png'), 
-            linear-gradient(135deg, var(--primary) 0%, #1e1b4b 100%);
+            background: url('https://cdn.jsdelivr.net/gh/falcon-bypass/falcon-bypass@main/falcon_BG1%20(1).png'), 
+                        linear-gradient(135deg, #0a0e17 0%, #1a1f3a 100%);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -36,23 +43,65 @@
             color: var(--text);
             min-height: 100vh;
             line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.2s ease;
+        }
+        
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 168, 255, 0.3);
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.6s ease;
+        }
+        
+        .purchase-btn, #buy-btn, .btn {
+            cursor: pointer !important;
+            pointer-events: auto !important;
+            position: relative;
+            z-index: 10000;
+        }
+        /* Particle Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
         
         .container {
-            max-width: 1800px;
+            max-width: 1600px;
             margin: 0 auto;
             padding: 0 20px;
         }
         
         /* Header & Navigation */
         header {
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(10, 14, 23, 0.8);
             backdrop-filter: blur(10px);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow);
         }
         
         nav {
@@ -70,11 +119,17 @@
             font-weight: 700;
             color: var(--text);
             text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
         }
         
         .logo img {
             height: 50px;
             width: auto;
+            filter: drop-shadow(0 0 8px rgba(0, 168, 255, 0.5));
         }
         
         .logo i {
@@ -90,8 +145,9 @@
             color: var(--text);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
             position: relative;
+            padding: 8px 0;
         }
         
         .nav-links a:hover {
@@ -105,11 +161,12 @@
         .nav-links a.active::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 100%;
             height: 2px;
             background: var(--accent);
+            box-shadow: var(--neon-glow);
         }
         
         .nav-actions {
@@ -118,26 +175,44 @@
         }
         
         .btn {
-            padding: 10px 20px;
-            border-radius: 6px;
+            padding: 12px 24px;
+            border-radius: 8px;
             font-weight: 600;
-            cursor: pointer;
+            cursor: none;
             transition: all 0.3s;
             text-decoration: none;
             display: inline-block;
             text-align: center;
             border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
         }
         
         .btn-primary {
             background: var(--accent);
             color: white;
+            box-shadow: 0 4px 15px rgba(0, 168, 255, 0.4);
         }
         
         .btn-primary:hover {
-            background: #2563eb;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+            background: #0097e6;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 168, 255, 0.6);
         }
         
         .btn-outline {
@@ -147,31 +222,52 @@
         }
         
         .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--accent-light);
             border-color: var(--accent);
+            box-shadow: var(--neon-glow);
         }
         
         /* Hero Section */
         .hero {
-            padding: 150px 0 80px;
+            padding: 180px 0 100px;
             text-align: center;
-            background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.1), transparent 50%);
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 168, 255, 0.1) 0%, transparent 70%);
+            z-index: -1;
         }
         
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             margin-bottom: 20px;
             background: linear-gradient(to right, #fff, var(--accent));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            text-shadow: 0 0 20px rgba(0, 168, 255, 0.5);
+            font-weight: 800;
         }
         
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--text-muted);
             max-width: 700px;
             margin: 0 auto 40px;
+        }
+        
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 60px;
         }
         
         .hero-stats {
@@ -183,6 +279,19 @@
         
         .stat {
             text-align: center;
+            padding: 20px;
+            background: var(--card-glass);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            min-width: 150px;
+        }
+        
+        .stat:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), var(--neon-glow);
         }
         
         .stat-number {
@@ -190,31 +299,47 @@
             font-weight: 700;
             color: var(--accent);
             display: block;
+            text-shadow: 0 0 10px rgba(0, 168, 255, 0.5);
         }
         
         .stat-label {
             font-size: 1rem;
             color: var(--text-muted);
+            font-weight: 500;
         }
         
         /* Section Styling */
         section {
-            padding: 80px 0;
+            padding: 100px 0;
         }
         
         .section-header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
         
         .section-title {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 15px;
             color: var(--text);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--accent);
+            box-shadow: var(--neon-glow);
         }
         
         .section-subtitle {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--text-muted);
             max-width: 600px;
             margin: 0 auto;
@@ -223,18 +348,20 @@
         /* Products Section */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 30px;
         }
         
         .product-card {
-            background: var(--card-bg);
-            border-radius: 12px;
+            background: var(--card-glass);
+            border-radius: 16px;
             padding: 30px;
             border: 1px solid var(--border);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.4s;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
         }
         
         .product-card::before {
@@ -245,30 +372,50 @@
             width: 100%;
             height: 4px;
             background: var(--accent);
+            box-shadow: var(--neon-glow);
+        }
+        
+        .product-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 168, 255, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
         
         .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), var(--neon-glow);
+        }
+        
+        .product-card:hover::after {
+            opacity: 1;
         }
         
         .product-icon {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             color: var(--accent);
             margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 168, 255, 0.5);
         }
         
         .product-name {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 15px;
             color: var(--text);
+            font-weight: 700;
         }
         
         .product-price {
-            font-size: 2rem;
-            font-weight: 700;
+            font-size: 2.2rem;
+            font-weight: 800;
             margin-bottom: 20px;
             color: var(--accent);
+            text-shadow: 0 0 10px rgba(0, 168, 255, 0.5);
         }
         
         .product-features {
@@ -277,7 +424,7 @@
         }
         
         .product-features li {
-            padding: 8px 0;
+            padding: 10px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
             align-items: center;
@@ -292,38 +439,42 @@
         .status-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            gap: 25px;
         }
         
         .status-card {
-            background: var(--card-bg);
-            border-radius: 12px;
+            background: var(--card-glass);
+            border-radius: 16px;
             padding: 25px;
             border: 1px solid var(--border);
             display: flex;
             align-items: center;
             gap: 15px;
             transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
         }
         
         .status-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), var(--neon-glow);
         }
         
         .status-icon {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
+            background: rgba(0, 168, 255, 0.1);
+            border: 1px solid var(--border);
         }
         
         .status-online {
-            background: rgba(16, 185, 129, 0.2);
             color: var(--success);
+            box-shadow: 0 0 10px rgba(0, 216, 167, 0.5);
         }
         
         .status-info {
@@ -331,102 +482,142 @@
         }
         
         .status-region {
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 5px;
+            font-size: 1.2rem;
         }
         
         .status-desc {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
         
         /* Download Section */
         .download-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
         }
         
         .download-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px;
+            background: var(--card-glass);
+            border-radius: 16px;
+            padding: 30px;
             border: 1px solid var(--border);
             text-align: center;
             transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .download-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent);
+            box-shadow: var(--neon-glow);
         }
         
         .download-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), var(--neon-glow);
         }
         
         .download-icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--accent);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 168, 255, 0.5);
         }
         
         .download-title {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
         }
         
         .download-desc {
             color: var(--text-muted);
             margin-bottom: 20px;
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
         
         .file-size {
             display: inline-block;
-            background: rgba(59, 130, 246, 0.2);
+            background: rgba(0, 168, 255, 0.2);
             color: var(--accent);
-            padding: 5px 10px;
+            padding: 6px 15px;
             border-radius: 20px;
-            font-size: 0.8rem;
-            margin-bottom: 15px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            font-weight: 600;
         }
         
         /* Features Section */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
         }
         
         .feature-card {
-            background: var(--card-bg);
-            border-radius: 12px;
+            background: var(--card-glass);
+            border-radius: 16px;
             padding: 30px;
             border: 1px solid var(--border);
-            transition: transform 0.3s;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent);
+            box-shadow: var(--neon-glow);
         }
         
         .feature-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), var(--neon-glow);
         }
         
         .feature-icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--accent);
             margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 168, 255, 0.5);
         }
         
         .feature-title {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             margin-bottom: 15px;
+            font-weight: 700;
         }
         
         .feature-desc {
             color: var(--text-muted);
+            font-size: 1rem;
         }
+        
         
         /* Footer */
         footer {
-            background: rgba(15, 23, 42, 0.9);
-            padding: 60px 0 30px;
+            background: rgba(10, 14, 23, 0.9);
+            padding: 80px 0 40px;
             border-top: 1px solid var(--border);
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2);
         }
         
         .footer-content {
@@ -437,9 +628,10 @@
         }
         
         .footer-column h3 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 20px;
             color: var(--text);
+            font-weight: 700;
         }
         
         .footer-links {
@@ -447,25 +639,26 @@
         }
         
         .footer-links li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         
         .footer-links a {
             color: var(--text-muted);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
         }
         
         .footer-links a:hover {
             color: var(--accent);
+            padding-left: 5px;
         }
         
         .footer-bottom {
             text-align: center;
-            padding-top: 30px;
+            padding-top: 40px;
             border-top: 1px solid var(--border);
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
         
         .social-links {
@@ -478,17 +671,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.05);
             color: var(--text);
             transition: all 0.3s;
+            border: 1px solid var(--border);
         }
         
         .social-links a:hover {
             background: var(--accent);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 168, 255, 0.4);
         }
         
         /* Modal */
@@ -503,42 +698,46 @@
             z-index: 2000;
             align-items: center;
             justify-content: center;
+            backdrop-filter: blur(5px);
         }
         
         .modal-content {
-            background: var(--secondary);
-            border-radius: 12px;
-            padding: 30px;
+            background: var(--card-glass);
+            border-radius: 16px;
+            padding: 35px;
             max-width: 500px;
             width: 90%;
             border: 1px solid var(--border);
             position: relative;
-            animation: modalFade 0.3s;
+            animation: modalFade 0.4s;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), var(--neon-glow);
         }
         
         @keyframes modalFade {
-            from { opacity: 0; transform: translateY(-50px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(-50px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
         
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .modal-title {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--text);
+            font-weight: 700;
         }
         
         .close-modal {
             background: none;
             border: none;
             color: var(--text-muted);
-            font-size: 1.5rem;
-            cursor: pointer;
+            font-size: 1.8rem;
+            cursor: none;
             transition: color 0.3s;
         }
         
@@ -547,13 +746,13 @@
         }
         
         .modal-body {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         
         .modal-footer {
             display: flex;
             justify-content: flex-end;
-            gap: 10px;
+            gap: 15px;
         }
         
         /* Responsive */
@@ -563,12 +762,21 @@
             }
             
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
             
             .hero-stats {
                 flex-direction: column;
-                gap: 30px;
+                gap: 20px;
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
             }
         }
         
@@ -591,44 +799,85 @@
         .region-info {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
+            gap: 40px;
+            background: var(--card-glass);
+            padding: 25px;
+            border-radius: 16px;
             border: 1px solid var(--border);
             margin: 40px auto 0;
-            max-width: 400px;
+            max-width: 450px;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
         }
 
         .region-item {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            font-weight: 600;
         }
 
         .region-dot {
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
         }
 
         .region-dot.global {
-            background: linear-gradient(45deg, #3b82f6, #1e40af);
+            background: linear-gradient(45deg, #00a8ff, #0097e6);
+            box-shadow: 0 0 8px rgba(0, 168, 255, 0.7);
         }
 
         .region-dot.bgmi {
-            background: linear-gradient(45deg, #ff9933, #ff6600);
+            background: linear-gradient(45deg, #ff9f43, #ff7e00);
+            box-shadow: 0 0 8px rgba(255, 159, 67, 0.7);
+        }
+        
+        /* Training Section Specific */
+        .training-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--accent), #0097e6);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0, 168, 255, 0.3);
+        }
+        
+        .training-level {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .training-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 15px 0;
+            text-shadow: 0 0 8px rgba(0, 168, 255, 0.5);
         }
     </style>
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+
     <!-- Header -->
     <header>
         <div class="container">
             <nav>
                 <a href="#" class="logo" onclick="showTab('home')">
-                    <img src="https://i.ibb.co/Gfz2wRst/Falcom-BG.png" alt="Falcon Bypass Logo">
-                    <span>Falcon Bypass</span>
+                    <img src="https://cdn.jsdelivr.net/gh/falcon-bypass/falcon-bypass@main/Falcom-BG%20(1).png" alt="FALCON BYPASS Logo">
+                    <span>FALCON BYPASS</span>
                 </a>
                 <div class="nav-links">
                     <a href="#" class="active" data-tab="home">Home</a>
@@ -649,23 +898,23 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="container">
-                <h1>Unleash Your Power</h1>
-                <p>Advanced gaming tools. Military-grade protection. Instant results.</p>
+                <h1>FALCON BYPASS</h1>
+                <p>Best PUBG Mobile/BGMI tool, Easy to get Conqueror</p>
                 <div class="hero-actions">
-                    <a href="#" class="btn btn-primary">Start Play</a>
+                    <a href="#" class="btn btn-primary">Start Playing</a>
                     <a href="#" class="btn btn-outline">Join Falcon Team</a>
                 </div>
                 <div class="hero-stats">
                     <div class="stat">
                         <span class="stat-number">1000+</span>
-                        <span class="stat-label">USERS</span>
+                        <span class="stat-label">ELITE PLAYERS</span>
                     </div>
                     <div class="stat">
                         <span class="stat-number">99.9%</span>
-                        <span class="stat-label">SAFE</span>
+                        <span class="stat-label">UNDETECTED</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-number">24*7</span>
+                        <span class="stat-number">24/7</span>
                         <span class="stat-label">SUPPORT</span>
                     </div>
                 </div>
@@ -673,140 +922,141 @@
         </section>
 
         <!-- Products Preview -->
-<section>
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title">Products</h2>
-            <p class="section-subtitle">SIMPLE, EFFECTIVE, UNDETECTED.</p>
-        </div>
-        <div class="products-grid">
-            <!-- Global Plans -->
-            <div class="product-card">
-                <div class="product-icon">
-                    <i class="fas fa-globe"></i>
+        <section>
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Premium Bypass</h2>
+                    <p class="section-subtitle">ADVANCED, UNDETECTED, DOMINATE.</p>
                 </div>
-                <h3 class="product-name">Falcon Bypass Global</h3>
-                <div class="product-price">$30/month</div>
-                <div class="product-badge" style="background: linear-gradient(45deg, #3b82f6, #1e40af); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 15px;">
-                    GLOBAL VERSION
-                </div>
-                <ul class="product-features">
-                    <li><i class="fas fa-check"></i> Anti-detection</li>
-                    <li><i class="fas fa-check"></i> Smart Controls</li>
-                    <li><i class="fas fa-check"></i> Auto-Aim & Bullet-Track + ESP</li>
-                    <li><i class="fas fa-check"></i> Anti-Ban Protection</li>
-                    <li><i class="fas fa-check"></i> 24/7 Premium Support</li>
-                    <li><i class="fas fa-check"></i> All Global Regions Supported</li>
-                </ul>
-                <button class="btn btn-primary purchase-btn" data-product="Falcon Bypass Global - $30/month">Buy Now</button>
-            </div>
-            
-            <div class="product-card">
-                <div class="product-icon">
-                    <i class="fas fa-tools"></i>
-                </div>
-                <h3 class="product-name">Falcon Bypass Global</h3>
-                <div class="product-price">$15/week</div>
-                <div class="product-badge" style="background: linear-gradient(45deg, #3b82f6, #1e40af); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 15px;">
-                    GLOBAL VERSION
-                </div>
-                <ul class="product-features">
-                    <li><i class="fas fa-check"></i> Anti-detection</li>
-                    <li><i class="fas fa-check"></i> Smart Controls</li>
-                    <li><i class="fas fa-check"></i> Auto-Aim & Bullet-Track + ESP</li>
-                    <li><i class="fas fa-check"></i> Anti-Ban Protection</li>
-                    <li><i class="fas fa-check"></i> 24/7 Premium Support</li>
-                    <li><i class="fas fa-check"></i> All Global Regions Supported</li>
-                </ul>
-                <button class="btn btn-primary purchase-btn" data-product="Falcon Bypass Global - $15/week">Buy Now</button>
-            </div>
+                <div class="products-grid">
+                    <!-- Global Plans -->
+                    <div class="product-card">
+                        <div class="product-icon">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <h3 class="product-name">Falcon Bypass Global</h3>
+                        <div class="product-price">$30/month</div>
+                        <div class="product-badge" style="background: linear-gradient(45deg, #00a8ff, #0097e6); color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 15px; font-weight: 600;">
+                            GLOBAL VERSION
+                        </div>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> Advanced Anti-detection</li>
+                            <li><i class="fas fa-check"></i> Smart Aim Controls</li>
+                            <li><i class="fas fa-check"></i> Auto-Aim & Bullet-Track + ESP</li>
+                            <li><i class="fas fa-check"></i> Quantum Shield Protection</li>
+                            <li><i class="fas fa-check"></i> 24/7 Elite Support</li>
+                            <li><i class="fas fa-check"></i> All Global Regions Supported</li>
+                        </ul>
+                        <button class="btn btn-primary purchase-btn" data-product="Falcon Bypass Global - $30/month">Buy Now</button>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="product-name">Falcon Bypass Global</h3>
+                        <div class="product-price">$15/week</div>
+                        <div class="product-badge" style="background: linear-gradient(45deg, #00a8ff, #0097e6); color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 15px; font-weight: 600;">
+                            GLOBAL VERSION
+                        </div>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> Advanced Anti-detection</li>
+                            <li><i class="fas fa-check"></i> Smart Aim Controls</li>
+                            <li><i class="fas fa-check"></i> Auto-Aim & Bullet-Track + ESP</li>
+                            <li><i class="fas fa-check"></i> Quantum Shield Protection</li>
+                            <li><i class="fas fa-check"></i> 24/7 Elite Support</li>
+                            <li><i class="fas fa-check"></i> All Global Regions Supported</li>
+                        </ul>
+                        <button class="btn btn-primary purchase-btn" data-product="Falcon Bypass Global - $15/week">Buy Now</button>
+                    </div>
 
-            <!-- BGMI India Plans -->
-            <div class="product-card">
-                <div class="product-icon">
-                    <i class="fas fa-flag"></i>
-                </div>
-                <h3 class="product-name">Falcon Bypass BGMI</h3>
-                <div class="product-price">₹2000/month</div>
-                <div class="product-badge" style="background: linear-gradient(45deg, #ff9933, #ff6600); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 15px;">
-                    BGMI INDIA
-                </div>
-                <ul class="product-features">
-                    <li><i class="fas fa-check"></i> Optimized for BGMI India</li>
-                    <li><i class="fas fa-check"></i> Anti-detection</li>
-                    <li><i class="fas fa-check"></i> Smart Controls</li>
-                    <li><i class="fas fa-check"></i> Auto-Aim & Bullet-Track + ESP</li>
-                    <li><i class="fas fa-check"></i> Speed Car & Mod Skin</li>
-                    <li><i class="fas fa-check"></i> Anti-Ban Protection</li>
-                    <li><i class="fas fa-check"></i> 24/7 Premium Support</li>
-                </ul>
-                <button class="btn btn-primary purchase-btn" data-product="Falcon Bypass BGMI - ₹2000/month" style="background: linear-gradient(45deg, #ff9933, #ff6600);">Buy Now</button>
-            </div>
+                    <!-- BGMI India Plans -->
+                    <div class="product-card">
+                        <div class="product-icon">
+                            <i class="fas fa-flag"></i>
+                        </div>
+                        <h3 class="product-name">Falcon Bypass BGMI</h3>
+                        <div class="product-price">₹2000/month</div>
+                        <div class="product-badge" style="background: linear-gradient(45deg, #ff9f43, #ff7e00); color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 15px; font-weight: 600;">
+                            BGMI INDIA
+                        </div>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> Optimized for BGMI India</li>
+                            <li><i class="fas fa-check"></i> Advanced Anti-detection</li>
+                            <li><i class="fas fa-check"></i> Smart Aim Controls</li>
+                            <li><i class="fas fa-check"></i> Auto-Aim & Bullet-Track + ESP</li>
+                            <li><i class="fas fa-check"></i> Speed Car & Mod Skin</li>
+                            <li><i class="fas fa-check"></i> Quantum Shield Protection</li>
+                            <li><i class="fas fa-check"></i> 24/7 Elite Support</li>
+                        </ul>
+                        <button class="btn btn-primary purchase-btn" data-product="Falcon Bypass BGMI - ₹2000/month" style="background: linear-gradient(45deg, #ff9f43, #ff7e00);">Buy Now</button>
+                    </div>
 
-            <!-- New BGMI Weekly Plan -->
-            <div class="product-card">
-                <div class="product-icon">
-                    <i class="fas fa-flag"></i>
+                    <!-- New BGMI Weekly Plan -->
+                    <div class="product-card">
+                        <div class="product-icon">
+                            <i class="fas fa-flag"></i>
+                        </div>
+                        <h3 class="product-name">Falcon Bypass BGMI</h3>
+                        <div class="product-price">₹1000/week</div>
+                        <div class="product-badge" style="background: linear-gradient(45deg, #ff9f43, #ff7e00); color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 15px; font-weight: 600;">
+                            BGMI INDIA
+                        </div>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> Optimized for BGMI India</li>
+                            <li><i class="fas fa-check"></i> Advanced Anti-detection</li>
+                            <li><i class="fas fa-check"></i> Smart Aim Controls</li>
+                            <li><i class="fas fa-check"></i> Auto-Aim & Bullet-Track + ESP</li>
+                            <li><i class="fas fa-check"></i> Speed Car & Mod Skin</li>
+                            <li><i class="fas fa-check"></i> Quantum Shield Protection</li>
+                            <li><i class="fas fa-check"></i> 24/7 Elite Support</li>
+                        </ul>
+                        <button class="btn btn-primary purchase-btn" data-product="Falcon Bypass BGMI - ₹1000/week" style="background: linear-gradient(45deg, #ff9f43, #ff7e00);">Buy Now</button>
+                    </div>
                 </div>
-                <h3 class="product-name">Falcon Bypass BGMI</h3>
-                <div class="product-price">₹1000/week</div>
-                <div class="product-badge" style="background: linear-gradient(45deg, #ff9933, #ff6600); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 15px;">
-                    BGMI INDIA
+                
+                <!-- Region Info Section -->
+                <div class="region-info">
+                    <div class="region-item">
+                        <div class="region-dot global"></div>
+                        <span>Global Version</span>
+                    </div>
+                    <div class="region-item">
+                        <div class="region-dot bgmi"></div>
+                        <span>BGMI India</span>
+                    </div>
                 </div>
-                <ul class="product-features">
-                    <li><i class="fas fa-check"></i> Optimized for BGMI India</li>
-                    <li><i class="fas fa-check"></i> Anti-detection</li>
-                    <li><i class="fas fa-check"></i> Smart Controls</li>
-                    <li><i class="fas fa-check"></i> Auto-Aim & Bullet-Track + ESP</li>
-                    <li><i class="fas fa-check"></i> Speed Car & Mod Skin</li>
-                    <li><i class="fas fa-check"></i> Anti-Ban Protection</li>
-                    <li><i class="fas fa-check"></i> 24/7 Premium Support</li>
-                </ul>
-                <button class="btn btn-primary purchase-btn" data-product="Falcon Bypass BGMI - ₹1000/week" style="background: linear-gradient(45deg, #ff9933, #ff6600);">Buy Now</button>
             </div>
-        </div>
-        
-        <!-- Region Info Section -->
-        <div class="region-info">
-            <div class="region-item">
-                <div class="region-dot global"></div>
-                <span>Global Version</span>
-            </div>
-            <div class="region-item">
-                <div class="region-dot bgmi"></div>
-                <span>BGMI India</span>
-            </div>
-        </div>
-    </div>
-</section>
+        </section>
 
-        <section style="background: rgba(15, 23, 42, 0.5);">
+        <!-- Features Section -->
+        <section style="background: rgba(10, 14, 23, 0.5);">
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Why Choose Falcon?</h2>
-                    <p class="section-subtitle">EXPERIENCE THE DIFFERENCE WITH OUR PREMIUM BYPASS SOLUTIONS</p>
+                    <p class="section-subtitle">EXPERIENCE THE DIFFERENCE WITH OUR ELITE GAMING SOLUTIONS</p>
                 </div>
                 <div class="features-grid">
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <i class="fas fa-bolt"></i>
+                            <i class="fas fa-shield-alt"></i>
                         </div>
                         <h3 class="feature-title">Quantum Shield</h3>
-                        <p class="feature-desc">Military-grade anti-detection system with quantum encryption technology for absolute stealth gaming.</p>
+                        <p class="feature-desc">Anti-detection so user easy Tier up without any issue.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-crosshairs"></i>
                         </div>
-                        <h3 class="feature-title">Auto-Aim</h3>
-                        <p class="feature-desc">Precision targeting system that automatically locks onto enemies for perfect shots every time.</p>
+                        <h3 class="feature-title">360 Aim-bot and Bullet-tract </h3>
+                        <p class="feature-desc">Advanced feature for track enemy/You can easy kill your opponent.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <i class="fas fa-ghost"></i>
+                            <i class="fas fa-bolt"></i>
                         </div>
-                        <h3 class="feature-title">Ghost Mode</h3>
-                        <p class="feature-desc">Remain completely invisible to enemy players while maintaining full combat capabilities.</p>
+                        <h3 class="feature-title">Lightning Performance</h3>
+                        <p class="feature-desc">Well performance with zero lag, ensuring smooth gameplay even on low-end devices.</p>
                     </div>
                 </div>
             </div>
@@ -814,124 +1064,126 @@
     </div>
 
     <!-- Products Tab -->
-<div id="products" class="tab-content">
-    <section class="hero" style="padding: 120px 0 60px;">
-        <div class="container">
-            <h1>Our Products</h1>
-            <p>CHOOSE THE PERFECT PLAN FOR YOUR GAMING NEEDS</p>
-        </div>
-    </section>
+    <div id="products" class="tab-content">
+        <section class="hero" style="padding: 150px 0 80px;">
+            <div class="container">
+                <h1>Our Products</h1>
+                <p>CHOOSE THE PERFECT PLAN FOR YOUR GAMING DOMINANCE</p>
+            </div>
+        </section>
 
-    <section>
-        <div class="container">
-            <div class="products-grid">
-                <!-- Global Plans -->
-                <div class="product-card">
-                    <div class="product-icon">
-                        <i class="fas fa-globe"></i>
+        <section>
+            <div class="container">
+                <div class="products-grid">
+                    <!-- Global Plans -->
+                    <div class="product-card">
+                        <div class="product-icon">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <h3 class="product-name">Falcon Bypass Global</h3>
+                        <div class="product-price">$30/month</div>
+                        <div class="product-badge" style="background: linear-gradient(45deg, #00a8ff, #0097e6); color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 15px; font-weight: 600;">
+                            GLOBAL VERSION
+                        </div>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> Advanced Anti-detection</li>
+                            <li><i class="fas fa-check"></i> Smart Aim Controls</li>
+                            <li><i class="fas fa-check"></i> Auto-Aim & Bullet-Track + ESP</li>
+                            <li><i class="fas fa-check"></i> Quantum Shield Protection</li>
+                            <li><i class="fas fa-check"></i> 24/7 Elite Support</li>
+                            <li><i class="fas fa-check"></i> All Global Regions Supported</li>
+                        </ul>
+                        <button class="btn btn-primary purchase-btn" data-product="Falcon Bypass Global - $30/month">Buy Now</button>
                     </div>
-                    <h3 class="product-name">Falcon Bypass Global</h3>
-                    <div class="product-price">$30/month</div>
-                    <div class="product-badge" style="background: linear-gradient(45deg, #3b82f6, #1e40af); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 15px;">
-                        GLOBAL VERSION
+                    
+                    <div class="product-card">
+                        <div class="product-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="product-name">Falcon Bypass Global</h3>
+                        <div class="product-price">$15/week</div>
+                        <div class="product-badge" style="background: linear-gradient(45deg, #00a8ff, #0097e6); color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 15px; font-weight: 600;">
+                            GLOBAL VERSION
+                        </div>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> Advanced Anti-detection</li>
+                            <li><i class="fas fa-check"></i> Smart Aim Controls</li>
+                            <li><i class="fas fa-check"></i> Auto-Aim & Bullet-Track + ESP</li>
+                            <li><i class="fas fa-check"></i> Quantum Shield Protection</li>
+                            <li><i class="fas fa-check"></i> 24/7 Elite Support</li>
+                            <li><i class="fas fa-check"></i> All Global Regions Supported</li>
+                        </ul>
+                        <button class="btn btn-primary purchase-btn" data-product="Falcon Bypass Global - $15/week">Buy Now</button>
                     </div>
-                    <ul class="product-features">
-                        <li><i class="fas fa-check"></i> Anti-detection</li>
-                        <li><i class="fas fa-check"></i> Smart Controls</li>
-                        <li><i class="fas fa-check"></i> Auto-Aim & Bullet-Track + ESP</li>
-                        <li><i class="fas fa-check"></i> Anti-Ban Protection</li>
-                        <li><i class="fas fa-check"></i> 24/7 Premium Support</li>
-                        <li><i class="fas fa-check"></i> All Global Regions Supported</li>
-                    </ul>
-                    <button class="btn btn-primary purchase-btn" data-product="Falcon Bypass Global - $30/month">Buy Now</button>
+
+                    <!-- BGMI India Plans -->
+                    <div class="product-card">
+                        <div class="product-icon">
+                            <i class="fas fa-flag"></i>
+                        </div>
+                        <h3 class="product-name">Falcon Bypass BGMI</h3>
+                        <div class="product-price">₹2000/month</div>
+                        <div class="product-badge" style="background: linear-gradient(45deg, #ff9f43, #ff7e00); color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 15px; font-weight: 600;">
+                            BGMI INDIA
+                        </div>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> Optimized for BGMI India</li>
+                            <li><i class="fas fa-check"></i> Advanced Anti-detection</li>
+                            <li><i class="fas fa-check"></i> Smart Aim Controls</li>
+                            <li><i class="fas fa-check"></i> Auto-Aim & Bullet-Track + ESP</li>
+                            <li><i class="fas fa-check"></i> Speed Car & Mod Skin</li>
+                            <li><i class="fas fa-check"></i> Quantum Shield Protection</li>
+                            <li><i class="fas fa-check"></i> 24/7 Elite Support</li>
+                        </ul>
+                        <button class="btn btn-primary purchase-btn" data-product="Falcon Bypass BGMI - ₹2000/month" style="background: linear-gradient(45deg, #ff9f43, #ff7e00);">Buy Now</button>
+                    </div>
+
+                    <!-- New BGMI Weekly Plan -->
+                    <div class="product-card">
+                        <div class="product-icon">
+                            <i class="fas fa-flag"></i>
+                        </div>
+                        <h3 class="product-name">Falcon Bypass BGMI</h3>
+                        <div class="product-price">₹1000/week</div>
+                        <div class="product-badge" style="background: linear-gradient(45deg, #ff9f43, #ff7e00); color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 15px; font-weight: 600;">
+                            BGMI INDIA
+                        </div>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> Optimized for BGMI India</li>
+                            <li><i class="fas fa-check"></i> Advanced Anti-detection</li>
+                            <li><i class="fas fa-check"></i> Smart Aim Controls</li>
+                            <li><i class="fas fa-check"></i> Auto-Aim & Bullet-Track + ESP</li>
+                            <li><i class="fas fa-check"></i> Speed Car & Mod Skin</li>
+                            <li><i class="fas fa-check"></i> Quantum Shield Protection</li>
+                            <li><i class="fas fa-check"></i> 24/7 Elite Support</li>
+                        </ul>
+                        <button class="btn btn-primary purchase-btn" data-product="Falcon Bypass BGMI - ₹1000/week" style="background: linear-gradient(45deg, #ff9f43, #ff7e00);">Buy Now</button>
+                    </div>
                 </div>
                 
-                <div class="product-card">
-                    <div class="product-icon">
-                        <i class="fas fa-tools"></i>
+                <!-- Region Info Section -->
+                <div class="region-info">
+                    <div class="region-item">
+                        <div class="region-dot global"></div>
+                        <span>Global Version</span>
                     </div>
-                    <h3 class="product-name">Falcon Bypass Global</h3>
-                    <div class="product-price">$15/week</div>
-                    <div class="product-badge" style="background: linear-gradient(45deg, #3b82f6, #1e40af); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 15px;">
-                        GLOBAL VERSION
+                    <div class="region-item">
+                        <div class="region-dot bgmi"></div>
+                        <span>BGMI India</span>
                     </div>
-                    <ul class="product-features">
-                        <li><i class="fas fa-check"></i> Anti-detection</li>
-                        <li><i class="fas fa-check"></i> Smart Controls</li>
-                        <li><i class="fas fa-check"></i> Auto-Aim & Bullet-Track + ESP</li>
-                        <li><i class="fas fa-check"></i> Anti-Ban Protection</li>
-                        <li><i class="fas fa-check"></i> 24/7 Premium Support</li>
-                        <li><i class="fas fa-check"></i> All Global Regions Supported</li>
-                    </ul>
-                    <button class="btn btn-primary purchase-btn" data-product="Falcon Bypass Global - $15/week">Buy Now</button>
-                </div>
-
-                <!-- BGMI India Plans -->
-                <div class="product-card">
-                    <div class="product-icon">
-                        <i class="fas fa-flag"></i>
-                    </div>
-                    <h3 class="product-name">Falcon Bypass BGMI</h3>
-                    <div class="product-price">₹2000/month</div>
-                    <div class="product-badge" style="background: linear-gradient(45deg, #ff9933, #ff6600); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 15px;">
-                        BGMI INDIA
-                    </div>
-                    <ul class="product-features">
-                        <li><i class="fas fa-check"></i> Optimized for BGMI India</li>
-                        <li><i class="fas fa-check"></i> Anti-detection</li>
-                        <li><i class="fas fa-check"></i> Smart Controls</li>
-                        <li><i class="fas fa-check"></i> Auto-Aim & Bullet-Track + ESP</li>
-                        <li><i class="fas fa-check"></i> Speed Car & Mod Skin</li>
-                        <li><i class="fas fa-check"></i> Anti-Ban Protection</li>
-                        <li><i class="fas fa-check"></i> 24/7 Premium Support</li>
-                    </ul>
-                    <button class="btn btn-primary purchase-btn" data-product="Falcon Bypass BGMI - ₹2000/month" style="background: linear-gradient(45deg, #ff9933, #ff6600);">Buy Now</button>
-                </div>
-
-                <!-- New BGMI Weekly Plan -->
-                <div class="product-card">
-                    <div class="product-icon">
-                        <i class="fas fa-flag"></i>
-                    </div>
-                    <h3 class="product-name">Falcon Bypass BGMI</h3>
-                    <div class="product-price">₹1000/week</div>
-                    <div class="product-badge" style="background: linear-gradient(45deg, #ff9933, #ff6600); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 15px;">
-                        BGMI INDIA
-                    </div>
-                    <ul class="product-features">
-                        <li><i class="fas fa-check"></i> Optimized for BGMI India</li>
-                        <li><i class="fas fa-check"></i> Anti-detection</li>
-                        <li><i class="fas fa-check"></i> Smart Controls</li>
-                        <li><i class="fas fa-check"></i> Auto-Aim & Bullet-Track + ESP</li>
-                        <li><i class="fas fa-check"></i> Speed Car & Mod Skin</li>
-                        <li><i class="fas fa-check"></i> Anti-Ban Protection</li>
-                        <li><i class="fas fa-check"></i> 24/7 Premium Support</li>
-                    </ul>
-                    <button class="btn btn-primary purchase-btn" data-product="Falcon Bypass BGMI - ₹1000/week" style="background: linear-gradient(45deg, #ff9933, #ff6600);">Buy Now</button>
                 </div>
             </div>
-            
-            <!-- Region Info Section -->
-            <div class="region-info">
-                <div class="region-item">
-                    <div class="region-dot global"></div>
-                    <span>Global Version</span>
-                </div>
-                <div class="region-item">
-                    <div class="region-dot bgmi"></div>
-                    <span>BGMI India</span>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
+        </section>
+    </div>
+
+    
 
     <!-- Download Tab -->
     <div id="download" class="tab-content">
-        <section class="hero" style="padding: 120px 0 60px;">
+        <section class="hero" style="padding: 150px 0 80px;">
             <div class="container">
                 <h1>Download Falcon</h1>
-                <p>Get access to our premium tools and start dominating today.</p>
+                <p>GET ACCESS TO OUR PREMIUM TOOLS AND START DOMINATING TODAY</p>
             </div>
         </section>
 
@@ -947,7 +1199,7 @@
                             <i class="fas fa-shield-alt"></i>
                         </div>
                         <h3 class="download-title">Falcon Bypass</h3>
-                        <p class="download-desc">Military-grade anti-detection system with quantum encryption technology.</p>
+                        <p class="download-desc">Best Anti-detection system with advanced technology.</p>
                         <span class="file-size">4.21 MB</span>
                         <a href="https://mega.nz/file/28pWQABD#adpZjkpQY0gr_ua3soXCr6QzyhdOGoXfFwgCsej7oTo" class="btn btn-primary" target="_blank">Download</a>
                     </div>
@@ -956,8 +1208,8 @@
                             <i class="fas fa-tools"></i>
                         </div>
                         <h3 class="download-title">Falcon Tool</h3>
-                        <p class="download-desc">Advanced PUBG Mobile tools featuring guest reset, ID reset, and device reset.</p>
-                        <span class="file-size">18.42 MB</span>
+                        <p class="download-desc">Advanced PUBG Mobile/BGMI tools many features for Easy setup.</p>
+                        <span class="file-size">17.15 MB</span>
                         <a href="http://anupam29.pythonanywhere.com/download/FALCON_TOOL.exe" class="btn btn-primary" target="_blank">Download</a>
                     </div>
                     <div class="download-card">
@@ -965,7 +1217,7 @@
                             <i class="fas fa-code"></i>
                         </div>
                         <h3 class="download-title">IND Hax</h3>
-                        <p class="download-desc">Specialized tools for BGMI (India) with enhanced features for regional gameplay.</p>
+                        <p class="download-desc">Best Hax in Market with many features (support all region).</p>
                         <span class="file-size">3.58 MB</span>
                         <a href="https://mega.nz/file/74AAyAAL#S_d7Xko8isz9es00iYbVjhihCXcAu9pUSeJeCHdFgTs" class="btn btn-primary" target="_blank">Download</a>
                     </div>
@@ -973,7 +1225,7 @@
             </div>
         </section>
 
-        <section style="background: rgba(15, 23, 42, 0.5);">
+        <section style="background: rgba(10, 14, 23, 0.5);">
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Game Clients</h2>
@@ -1016,9 +1268,9 @@
                         <div class="download-icon">
                             <i class="fas fa-flag"></i>
                         </div>
-                        <h3 class="download-title">BGMI India (4.0)</h3>
+                        <h3 class="download-title">BGMI India (4.1)</h3>
                         <p class="download-desc">Battlegrounds Mobile India, the official Indian version of PUBG Mobile.</p>
-                        <a href="https://drive.google.com/drive/folders/1asPtva6kE4kHVnw8zuJrJfqCzhazjeue" class="btn btn-outline">Download</a>
+                        <a href="https://drive.google.com/drive/folders/17twDs6qAPHXLJzpzBjyd7VQO0hRjAFgw?usp=sharing" class="btn btn-outline">Download</a>
                     </div>
                 </div>
             </div>
@@ -1027,7 +1279,7 @@
 
     <!-- Status Tab -->
     <div id="status" class="tab-content">
-        <section class="hero" style="padding: 120px 0 60px;">
+        <section class="hero" style="padding: 150px 0 80px;">
             <div class="container">
                 <h1>Server Status</h1>
                 <p>REAL-TIME DETECTION STATUS ACROSS ALL REGIONS</p>
@@ -1084,17 +1336,17 @@
                     </div>
                 </div>
                 
-                <div class="update-info" style="background: var(--card-bg); border-radius: 12px; padding: 20px; margin-top: 30px; text-align: center;">
-                    <h3 style="margin-bottom: 10px;">Status Update</h3>
-                    <p style="color: var(--text-muted);">All regions are currently undetected and running smoothly. Status last updated: <span id="status-time">Just now</span></p>
-                    <div style="margin-top: 15px;">
-                        <span class="file-size" style="background: rgba(16, 185, 129, 0.2); color: var(--success);">All Systems Operational</span>
+                <div class="update-info" style="background: var(--card-glass); border-radius: 16px; padding: 25px; margin-top: 40px; text-align: center; border: 1px solid var(--border); backdrop-filter: blur(10px); box-shadow: var(--shadow);">
+                    <h3 style="margin-bottom: 15px; font-size: 1.5rem;">Status Update</h3>
+                    <p style="color: var(--text-muted); font-size: 1.1rem;">All regions are currently undetected and running smoothly. Status last updated: <span id="status-time">Just now</span></p>
+                    <div style="margin-top: 20px;">
+                        <span class="file-size" style="background: rgba(0, 216, 167, 0.2); color: var(--success); font-size: 1rem; padding: 8px 20px;">All Systems Operational</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section style="background: rgba(15, 23, 42, 0.5);">
+        <section style="background: rgba(10, 14, 23, 0.5);">
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Support & Contact</h2>
@@ -1107,7 +1359,7 @@
                         </div>
                         <h3 class="feature-title">Discord Support</h3>
                         <p class="feature-desc">Join our community for instant help, updates, and discussions with other users.</p>
-                        <a href="https://discord.gg/xZKC5TKTMW" class="btn btn-primary" style="margin-top: 15px;" target="_blank">Join Server</a>
+                        <a href="https://discord.com/invite/xZKC5TKTMW" class="btn btn-primary" style="margin-top: 15px;" target="_blank">Join Server</a>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
@@ -1123,8 +1375,9 @@
                         </div>
                         <h3 class="feature-title">Direct Support</h3>
                         <p class="feature-desc">Contact our support team directly for personalized assistance.</p>
-                        <p style="margin-top: 15px; font-weight: 600;">Telegram: @DX_KINGS</p>
-                        <a href="https://discord.gg/xZKC5TKTMW" class="btn btn-outline" style="margin-top: 10px;" target="_blank">Contact Now</a>
+                        <p style="margin-top: 15px; font-weight: 600;">Discord: dxkings</p>
+                        <p style="margin-bottom: 15px; font-weight: 600;">Telegram: @DX_KINGS</p>
+                        <a href="https://discord.com/invite/xZKC5TKTMW" class="btn btn-outline" style="margin-top: 10px;" target="_blank">Contact Now</a>
                     </div>
                 </div>
             </div>
@@ -1136,10 +1389,10 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>Falcon Bypass</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 20px;">Premium PUBG Mobile/BGMI optimization solutions for competitive players.</p>
+                    <h3>FALCON BYPASS</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;">Premium PUBG Mobile/BGMI Bypass Easy dominate the battleground.</p>
                     <div class="social-links">
-                        <a href="https://discord.gg/xZKC5TKTMW" target="_blank"><i class="fab fa-discord"></i></a>
+                        <a href="https://discord.com/invite/xZKC5TKTMW" target="_blank"><i class="fab fa-discord"></i></a>
                         <a href="https://t.me/falconbypass" target="_blank"><i class="fab fa-telegram"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                     </div>
@@ -1148,27 +1401,22 @@
                     <h3>Products</h3>
                     <ul class="footer-links">
                         <li><a href="https://mega.nz/file/28pWQABD#adpZjkpQY0gr_ua3soXCr6QzyhdOGoXfFwgCsej7oTo">Falcon Bypass</a></li>
-                        <li><a href="http://anupam29.pythonanywhere.com/download/FALCON_TOOL.exe">Falcon Tool</a></li>
+                        <li><a href="http://anupam29.pythonanywhere.com/download/FALCON_TOOL.exe">Falcon AIO Tool</a></li>
                         <li><a href="https://mega.nz/file/74AAyAAL#S_d7Xko8isz9es00iYbVjhihCXcAu9pUSeJeCHdFgTs">IND Hax</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Support</h3>
                     <ul class="footer-links">
-                        <li><a href="https://discord.gg/xZKC5TKTMW" target="_blank">Discord Server</a></li>
+                        <li><a href="https://discord.com/invite/xZKC5TKTMW" target="_blank">Discord Server</a></li>
                         <li><a href="https://t.me/falconbypass" target="_blank">Telegram VIP</a></li>
-                        <li><a href="#">Contact Support</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Legal</h3>
-                    <ul class="footer-links">
+                        <li><a href="https://discord.com/invite/xZKC5TKTMW" target="_blank">Contact Support</a></li>
                         <li><a href="#" onclick="showRefundPolicy()">Refund Policy</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 Falcon Bypass. All rights reserved. | Status updates provided by system owner</p>
+                <p>&copy; 2023 FALCON BYPASS. All rights reserved. | Status updates provided by system owner</p>
             </div>
         </div>
     </footer>
@@ -1181,12 +1429,12 @@
                 <button class="close-modal">&times;</button>
             </div>
             <div class="modal-body">
-                <p>To purchase, please join our Discord server and create a ticket mentioning which plan you want to buy:</p>
-                <div id="selected-product" style="background: var(--card-bg); padding: 15px; border-radius: 8px; margin: 15px 0; text-align: center; font-weight: 600;"></div>
+                <p>To purchase, please join our Discord server and create a ticket mentioning which product you want to buy:</p>
+                <div id="selected-product" style="background: var(--card-glass); padding: 15px; border-radius: 8px; margin: 15px 0; text-align: center; font-weight: 600; border: 1px solid var(--border);"></div>
                 <p style="color: var(--text-muted); font-size: 0.9rem;">Our team will respond instantly and help you complete your purchase.</p>
             </div>
             <div class="modal-footer">
-                <a href="https://discord.gg/xZKC5TKTMW" class="btn btn-primary" target="_blank">Join Discord</a>
+                <a href="https://discord.com/invite/xZKC5TKTMW" class="btn btn-primary" target="_blank">Join Discord</a>
                 <button class="btn btn-outline close-modal">Cancel</button>
             </div>
         </div>
@@ -1202,7 +1450,7 @@
             <div class="modal-body">
                 <h4 style="margin-bottom: 15px; color: var(--danger);">No Refund Policy</h4>
                 <p>All sales are final and non-refundable. By completing your purchase, you acknowledge and accept this policy.</p>
-                <p style="margin-top: 15px; color: var(--text-muted);">We do not offer refunds for any of our optimization tools or services under any circumstances.</p>
+                <p style="margin-top: 15px; color: var(--text-muted);">We do not offer refunds for any of our optimization tools or training services under any circumstances.</p>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-outline close-modal">I Understand</button>
@@ -1210,16 +1458,81 @@
         </div>
     </div>
 
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Join Falcon Team functionality
-document.querySelectorAll('.btn-outline').forEach(btn => {
-    if (btn.textContent.includes('Join Falcon Team')) {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            window.open('https://discord.gg/xZKC5TKTMW', '_blank');
+        // Initialize particles background
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#00a8ff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#00a8ff",
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                }
+            },
+            retina_detect: true
         });
-    }
-});
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        document.querySelectorAll('a, button, .product-card, .feature-card, .status-card, .download-card, .training-card').forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(1.5)';
+                cursorFollower.style.transform = 'scale(1.5)';
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursorFollower.style.transform = 'scale(1)';
+            });
+        });
+
+        // Join Falcon Team functionality
+        document.querySelectorAll('.btn-outline').forEach(btn => {
+            if (btn.textContent.includes('Join Falcon Team')) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.open('https://discord.com/invite/xZKC5TKTMW', '_blank');
+                });
+            }
+        });
+
         // Tab Navigation
         function showTab(tabId) {
             // Remove active class from all links and tabs
@@ -1236,7 +1549,7 @@ document.querySelectorAll('.btn-outline').forEach(btn => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        document.querySelectorAll('.nav-links a').forEach(link => {
+        document.querySelectorAll('.nav-links a, .footer-links a[data-tab]').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const tabId = this.getAttribute('data-tab');
@@ -1257,14 +1570,14 @@ document.querySelectorAll('.btn-outline').forEach(btn => {
             purchaseModal.style.display = 'flex';
         });
 
-        // Product purchase buttons
-        document.querySelectorAll('.purchase-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
+        // Product purchase buttons - using event delegation
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('purchase-btn')) {
                 e.preventDefault();
-                const product = this.getAttribute('data-product');
+                const product = e.target.getAttribute('data-product');
                 document.getElementById('selected-product').textContent = product;
                 purchaseModal.style.display = 'flex';
-            });
+            }
         });
 
         // Refund policy
@@ -1310,103 +1623,62 @@ document.querySelectorAll('.btn-outline').forEach(btn => {
         // Update every minute
         setInterval(updateStatusTime, 60000);
 
-        // Add some interactive effects to status cards
-        document.querySelectorAll('.status-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px) scale(1.02)';
+        // Animate stats counter
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const originalText = stat.textContent;
+                
+                // Handle 1000+ case
+                if (originalText.includes('1000+')) {
+                    const target = 1000;
+                    let current = 0;
+                    const increment = target / 30;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            stat.textContent = '1000+';
+                            clearInterval(timer);
+                        } else {
+                            stat.textContent = Math.floor(current);
+                        }
+                    }, 40);
+                }
+                // Handle percentage numbers
+                else if (originalText.includes('%')) {
+                    const target = parseFloat(originalText);
+                    let current = 0;
+                    const increment = target / 30;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            stat.textContent = target.toFixed(1) + '%';
+                            clearInterval(timer);
+                        } else {
+                            stat.textContent = current.toFixed(1) + '%';
+                        }
+                    }, 40);
+                }
+                // Handle 24/7 case
+                else if (originalText.includes('/')) {
+                    const target = 24;
+                    let current = 0;
+                    const increment = target / 30;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            stat.textContent = '24/7';
+                            clearInterval(timer);
+                        } else {
+                            stat.textContent = Math.floor(current);
+                        }
+                    }, 40);
+                }
             });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
+        }
 
-        // Animate stats counter - FIXED VERSION
-function animateStats() {
-    const stats = document.querySelectorAll('.stat-number');
-    stats.forEach(stat => {
-        const originalText = stat.textContent;
-        
-        // Handle 1000+ case
-        if (originalText.includes('1000+')) {
-            const target = 1000;
-            let current = 0;
-            const increment = target / 30;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    stat.textContent = '1000+';
-                    clearInterval(timer);
-                } else {
-                    stat.textContent = Math.floor(current);
-                }
-            }, 40);
-        }
-        // Handle K+ numbers (like 10K+)
-        else if (originalText.includes('K')) {
-            const target = parseInt(originalText);
-            let current = 0;
-            const increment = target / 30;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    stat.textContent = target + 'K+';
-                    clearInterval(timer);
-                } else {
-                    stat.textContent = Math.floor(current) + 'K+';
-                }
-            }, 40);
-        }
-        // Handle 24*7 case
-        else if (originalText.includes('*')) {
-            const target = 24;
-            let current = 0;
-            const increment = target / 30;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    stat.textContent = '24/7';
-                    clearInterval(timer);
-                } else {
-                    stat.textContent = Math.floor(current);
-                }
-            }, 40);
-        }
-        // Handle percentage numbers
-        else if (originalText.includes('%')) {
-            const target = parseFloat(originalText);
-            let current = 0;
-            const increment = target / 30;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    stat.textContent = target.toFixed(1) + '%';
-                    clearInterval(timer);
-                } else {
-                    stat.textContent = current.toFixed(1) + '%';
-                }
-            }, 40);
-        }
-        // Handle regular numbers
-        else {
-            const target = parseInt(originalText);
-            let current = 0;
-            const increment = target / 30;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    stat.textContent = target;
-                    clearInterval(timer);
-                } else {
-                    stat.textContent = Math.floor(current);
-                }
-            }, 40);
-        }
-    });
-}
-
-// Start animation when page loads
-window.addEventListener('load', animateStats);
+        // Start animation when page loads
+        window.addEventListener('load', animateStats);
     </script>
 </body>
 </html>
